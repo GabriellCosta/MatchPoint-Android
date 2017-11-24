@@ -12,7 +12,9 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import com.caetano.r.mypoint.R
 import com.caetano.r.mypoint.UserManager
-import com.caetano.r.mypoint.api.*
+import com.caetano.r.mypoint.api.Api
+import com.caetano.r.mypoint.api.Register
+import com.caetano.r.mypoint.api.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,20 +75,10 @@ class MiniWidget : AppWidgetProvider() {
     }
 
     private fun generateRegisterData(): Register {
-        val timeCard = generateTimeCard()
-        val device = generateDevice()
+        val timeCard = DataMockFactory.timeCard()
+        val device = DataMockFactory.device()
         return Register(timeCard, "/meu_ponto/registro_de_ponto", device,
                 "0.10.21")
-    }
-
-    private fun generateDevice() = Device("4.1.0", "unknown", "Chrome", "browser", null, "61.0.3163.79")
-
-    private fun generateTimeCard(): TimeCard {
-        return TimeCard(-23.6015042, -46.694538,
-                "Av. das Nações Unidas, 11541 - Cidade Monções, São Paulo - SP, Brasil",
-                null, -23.6015042, -46.694538,
-                "Av. das Nações Unidas, 11541 - Cidade Monções, São Paulo - SP, Brasil",
-                false, 30)
     }
 
     private fun updateLastRegisterText(context: Context) {
